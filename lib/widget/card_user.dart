@@ -17,7 +17,9 @@ class _CardUserState extends State<CardUser> {
           height: 170,
           width: double.infinity,
           decoration: BoxDecoration(
-            image: DecorationImage(image: AssetImage('images/background-card.jpg'), fit: BoxFit.cover),
+            image: const DecorationImage(
+                image: AssetImage('images/background-card.jpg'),
+                fit: BoxFit.cover),
             borderRadius: BorderRadius.circular(20),
           ),
           child: Padding(
@@ -31,11 +33,20 @@ class _CardUserState extends State<CardUser> {
                           fontSize: 22,
                           fontWeight: FontWeight.bold,
                           color: Colors.white)),
-                  Text('Jabatan',
-                      style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white70)),
+                  Column(
+                    children: [
+                      Text('Jabatan',
+                          style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white70)),
+                      Text('Kategori',
+                          style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white70)),
+                    ],
+                  ),
                   Text('NIP',
                       style: TextStyle(
                           fontSize: 20,
