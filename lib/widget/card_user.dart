@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 
-class CardUser extends StatefulWidget {
-  const CardUser({super.key});
+class CardUser extends StatelessWidget {
+  final String namaKaryawan;
+  final String jabatan;
+  final String kategori;
+  final String nip;
 
-  @override
-  State<CardUser> createState() => _CardUserState();
-}
+  const CardUser(
+      {super.key,
+      required this.namaKaryawan,
+      required this.jabatan,
+      required this.kategori,
+      required this.nip});
 
-class _CardUserState extends State<CardUser> {
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -28,26 +33,26 @@ class _CardUserState extends State<CardUser> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  Text('Nama Karyawan',
+                  Text(namaKaryawan,
                       style: TextStyle(
                           fontSize: 22,
                           fontWeight: FontWeight.bold,
                           color: Colors.white)),
                   Column(
                     children: [
-                      Text('Jabatan',
+                      Text(jabatan,
                           style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
                               color: Colors.white70)),
-                      Text('Kategori',
+                      Text(kategori,
                           style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
                               color: Colors.white70)),
                     ],
                   ),
-                  Text('NIP',
+                  Text(nip,
                       style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,

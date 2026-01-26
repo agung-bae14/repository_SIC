@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:sic/controllers/page_index_controller.dart';
 import 'package:sic/modules/home/controllers/home_controller.dart';
-import 'package:sic/modules/presensi/views/presensi_page.dart';
 import 'package:sic/widget/card_user.dart';
+import 'package:sic/widget/menu_widget.dart';
 
 final pages = Get.find<PageIndexController>();
 
@@ -32,387 +31,112 @@ class HomePage extends GetView<HomeController> {
                     ],
                   ),
                   const SizedBox(height: 20),
-                  CardUser(),
+                  CardUser(namaKaryawan: "Nama Karyawan", jabatan: "Jabatan", kategori: "Kategori", nip: "NIP"),
                   const SizedBox(height: 20),
-                  Row(
+                  const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: <Widget>[
                       Expanded(
-                        child: Column(
-                          children: [
-                            Container(
-                              height: 60,
-                              width: 60,
-                              decoration: BoxDecoration(
-                                color: const Color.fromARGB(255, 181, 231, 255),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: const Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: Icon(
-                                    Icons.groups_outlined,
-                                    color: Colors.blue,
-                                    size: 35,
-                                  )),
-                            ),
-                            const SizedBox(height: 5),
-                            const Text(
-                              "HRIS",
-                              style: TextStyle(
-                                  color: Colors.black87,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w500),
-                            )
-                          ],
-                        ),
-                      ),
+                          child: MenuWidget(
+                        colorBg: const Color.fromARGB(255, 181, 231, 255),
+                        iconPath: Icons.groups_outlined,
+                        colorIc: Colors.blue,
+                        title: 'HRIS',
+                      )),
                       Expanded(
-                        child: Column(
-                          children: [
-                            Container(
-                              height: 60,
-                              width: 60,
-                              decoration: BoxDecoration(
-                                color: const Color.fromARGB(255, 181, 255, 186),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: const Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: Icon(
-                                    Icons.article_outlined,
-                                    color: Colors.green,
-                                    size: 35,
-                                  )),
-                            ),
-                            const SizedBox(height: 5),
-                            const Text(
-                              "Pengajuan Online",
-                              style: TextStyle(
-                                  color: Colors.black87,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w500),
-                            )
-                          ],
-                        ),
-                      ),
+                          child: MenuWidget(
+                        colorBg: const Color.fromARGB(255, 181, 255, 186),
+                        iconPath: Icons.article_outlined,
+                        colorIc: Colors.green,
+                        title: "Pengajuan Online",
+                      )),
                       Expanded(
-                        child: Column(
-                          children: [
-                            Container(
-                              height: 60,
-                              width: 60,
-                              decoration: BoxDecoration(
-                                color: const Color.fromARGB(255, 255, 249, 208),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: const Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: Icon(
-                                    Icons.apartment_outlined,
-                                    color: Color.fromARGB(255, 171, 155, 12),
-                                    size: 35,
-                                  )),
-                            ),
-                            const SizedBox(height: 5),
-                            const Text(
-                              "Aset",
-                              style: TextStyle(
-                                  color: Colors.black87,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w500),
-                            )
-                          ],
-                        ),
-                      ),
+                          child: MenuWidget(
+                              colorBg: const Color.fromARGB(255, 255, 249, 208),
+                              iconPath: Icons.apartment_outlined,
+                              colorIc: Color.fromARGB(255, 171, 155, 12),
+                              title: "Aset")),
                     ],
                   ),
                   const SizedBox(height: 10),
-                  Row(
+                  const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: <Widget>[
                       Expanded(
-                        child: Column(
-                          children: [
-                            Container(
-                              height: 60,
-                              width: 60,
-                              decoration: BoxDecoration(
-                                color: const Color.fromARGB(255, 249, 181, 255),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: const Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: Icon(
-                                    Icons.rebase_edit,
-                                    color: Colors.purple,
-                                    size: 35,
-                                  )),
-                            ),
-                            const SizedBox(height: 5),
-                            const Text(
-                              "RND",
-                              style: TextStyle(
-                                  color: Colors.black87,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w500),
-                            )
-                          ],
-                        ),
-                      ),
+                          child: MenuWidget(
+                              colorBg: const Color.fromARGB(255, 249, 181, 255),
+                              iconPath: Icons.rebase_edit,
+                              colorIc: Colors.purple,
+                              title: "RND")),
                       Expanded(
-                        child: Column(
-                          children: [
-                            Container(
-                              height: 60,
-                              width: 60,
-                              decoration: BoxDecoration(
-                                color: const Color.fromARGB(255, 255, 186, 181),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: const Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: Icon(
-                                    Icons.science_outlined,
-                                    color: Colors.red,
-                                    size: 35,
-                                  )),
-                            ),
-                            const SizedBox(height: 5),
-                            const Text(
-                              "Knitting",
-                              style: TextStyle(
-                                  color: Colors.black87,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w500),
-                            )
-                          ],
-                        ),
-                      ),
+                          child: MenuWidget(
+                              colorBg: const Color.fromARGB(255, 255, 186, 181),
+                              iconPath: Icons.science_outlined,
+                              colorIc: Colors.red,
+                              title: "Knitting")),
                       Expanded(
-                        child: Column(
-                          children: [
-                            Container(
-                              height: 60,
-                              width: 60,
-                              decoration: BoxDecoration(
-                                color: const Color.fromARGB(255, 234, 208, 255),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: const Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: Icon(
-                                    Icons.camera_roll_outlined,
-                                    color: Colors.deepPurple,
-                                    size: 35,
-                                  )),
-                            ),
-                            const SizedBox(height: 5),
-                            const Text(
-                              "Knitting Sock",
-                              style: TextStyle(
-                                  color: Colors.black87,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w500),
-                            )
-                          ],
-                        ),
-                      ),
+                          child: MenuWidget(
+                              colorBg: const Color.fromARGB(255, 234, 208, 255),
+                              iconPath: Icons.camera_roll_outlined,
+                              colorIc: Colors.deepPurple,
+                              title: "Knitting Sock")),
                     ],
                   ),
                   const SizedBox(height: 10),
-                  Row(
+                  const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: <Widget>[
                       Expanded(
-                        child: Column(
-                          children: [
-                            Container(
-                              height: 60,
-                              width: 60,
-                              decoration: BoxDecoration(
-                                color: const Color.fromARGB(255, 181, 255, 255),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: const Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: Icon(
-                                    Icons.api_outlined,
-                                    color: Color.fromARGB(255, 56, 156, 156),
-                                    size: 35,
-                                  )),
-                            ),
-                            const SizedBox(height: 5),
-                            const Text(
-                              "RAW Material",
-                              style: TextStyle(
-                                  color: Colors.black87,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w500),
-                            )
-                          ],
-                        ),
-                      ),
+                          child: MenuWidget(
+                              colorBg: const Color.fromARGB(255, 181, 255, 255),
+                              iconPath: Icons.api_outlined,
+                              colorIc: Color.fromARGB(255, 56, 156, 156),
+                              title: "RAW Material")),
                       Expanded(
-                        child: Column(
-                          children: [
-                            Container(
-                              height: 60,
-                              width: 60,
-                              decoration: BoxDecoration(
-                                color: const Color.fromARGB(255, 234, 208, 255),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: const Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: Icon(
-                                    Icons.tab_outlined,
-                                    color: Colors.deepPurple,
-                                    size: 35,
-                                  )),
-                            ),
-                            const SizedBox(height: 5),
-                            const Text(
-                              "Aksesoris Inventory",
-                              style: TextStyle(
-                                  color: Colors.black87,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w500),
-                            )
-                          ],
-                        ),
-                      ),
+                          child: MenuWidget(
+                              colorBg: const Color.fromARGB(255, 234, 208, 255),
+                              iconPath: Icons.tab_outlined,
+                              colorIc: Colors.deepPurple,
+                              title: "Aksesoris Inventory")),
                       Expanded(
-                        child: Column(
-                          children: [
-                            Container(
-                              height: 60,
-                              width: 60,
-                              decoration: BoxDecoration(
-                                color: const Color.fromARGB(255, 181, 255, 186),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: const Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: Icon(
-                                    Icons.card_travel_outlined,
-                                    color: Colors.green,
-                                    size: 35,
-                                  )),
-                            ),
-                            const SizedBox(height: 5),
-                            const Text(
-                              "Rumah Jahit",
-                              style: TextStyle(
-                                  color: Colors.black87,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w500),
-                            )
-                          ],
-                        ),
-                      ),
+                          child: MenuWidget(
+                              colorBg: const Color.fromARGB(255, 181, 255, 186),
+                              iconPath: Icons.card_travel_outlined,
+                              colorIc: Colors.green,
+                              title: "Rumah Jahit")),
                     ],
                   ),
                   const SizedBox(height: 10),
-                  Row(
+                  const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: <Widget>[
                       Expanded(
-                        child: Column(
-                          children: [
-                            Container(
-                              height: 60,
-                              width: 60,
-                              decoration: BoxDecoration(
-                                color: const Color.fromARGB(255, 249, 181, 255),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: const Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: Icon(
-                                    Icons.bolt_outlined,
-                                    color: Colors.purple,
-                                    size: 35,
-                                  )),
-                            ),
-                            const SizedBox(height: 5),
-                            const Text(
-                              "Quantum",
-                              style: TextStyle(
-                                  color: Colors.black87,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w500),
-                            )
-                          ],
-                        ),
-                      ),
+                          child: MenuWidget(
+                              colorBg: const Color.fromARGB(255, 249, 181, 255),
+                              iconPath: Icons.bolt_outlined,
+                              colorIc: Colors.purple,
+                              title: "Quantum")),
                       Expanded(
-                        child: Column(
-                          children: [
-                            Container(
-                              height: 60,
-                              width: 60,
-                              decoration: BoxDecoration(
-                                color: const Color.fromARGB(255, 181, 255, 186),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: const Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: Icon(
-                                    Icons.monetization_on_outlined,
-                                    color: Colors.green,
-                                    size: 35,
-                                  )),
-                            ),
-                            const SizedBox(height: 5),
-                            const Text(
-                              "Koperasi",
-                              style: TextStyle(
-                                  color: Colors.black87,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w500),
-                            )
-                          ],
-                        ),
-                      ),
+                          child: MenuWidget(
+                              colorBg: const Color.fromARGB(255, 181, 255, 186),
+                              iconPath: Icons.monetization_on_outlined,
+                              colorIc: Colors.green,
+                              title: "Koperasi")),
                       Expanded(
-                        child: Column(
-                          children: [
-                            Container(
-                              height: 60,
-                              width: 60,
-                              decoration: BoxDecoration(
-                                color: const Color.fromARGB(255, 255, 249, 208),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: const Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: Icon(
-                                    Icons.calculate_outlined,
-                                    color: Color.fromARGB(255, 171, 155, 12),
-                                    size: 35,
-                                  )),
-                            ),
-                            const SizedBox(height: 5),
-                            const Text(
-                              "AIS",
-                              style: TextStyle(
-                                  color: Colors.black87,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w500),
-                            )
-                          ],
-                        ),
-                      ),
+                          child: MenuWidget(
+                              colorBg: const Color.fromARGB(255, 255, 249, 208),
+                              iconPath: Icons.calculate_outlined,
+                              colorIc: Color.fromARGB(255, 171, 155, 12),
+                              title: "AIS")),
                     ],
                   ),
                   const SizedBox(height: 10),
-                  ],
+                ],
               ),
             ),
           ),
         ],
       ),
-      
     );
   }
 }

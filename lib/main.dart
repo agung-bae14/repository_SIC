@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sic/controllers/page_index_controller.dart';
-import 'package:sic/modules/home/views/home_page.dart';
-import 'package:sic/modules/login/views/login_page.dart';
-import 'package:sic/modules/presensi/views/presensi_page.dart';
 import 'package:sic/routes/app_pages.dart';
 
 void main() async {
@@ -21,7 +18,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'SIC',
       theme: ThemeData(
-        primaryColor: Colors.green,
+        primaryColor: Color(0xff46b83d),
         useMaterial3: true,
       ),
       initialRoute: Routes.HOME,

@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 
-import 'package:sic/modules/home/views/home_page.dart';
 import 'package:sic/modules/login/views/login_page.dart';
 import 'package:sic/modules/presensi/views/presensi_page.dart';
 import 'package:sic/modules/profile/views/profile_page.dart';
