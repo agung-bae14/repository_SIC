@@ -17,7 +17,7 @@ class HomePage extends GetView<HomeController> {
         children: [
           SafeArea(
             child: Padding(
-              padding: const EdgeInsets.all(20.0),
+              padding: const EdgeInsets.only(top: 35,bottom: 20,left: 20,right: 20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[

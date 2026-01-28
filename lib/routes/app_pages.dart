@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:sic/modules/edit_profile/views/edit_profile_page.dart';
 
 import 'package:sic/modules/login/views/login_page.dart';
 import 'package:sic/modules/presensi/views/presensi_page.dart';
@@ -15,5 +16,6 @@ class AppPages {
     GetPage(name: _Paths.LOGIN, page: () => LoginPage()),
     GetPage(name: _Paths.PRESENSI, page: () => PresensiPage()),
     GetPage(name: _Paths.PROFILE, page: () => ProfilePage()),
+    GetPage(name: _Paths.EDIT_PROFILE, page: () => EditProfilePage())
   ];
 }

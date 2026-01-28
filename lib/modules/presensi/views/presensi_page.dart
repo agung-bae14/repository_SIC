@@ -1,11 +1,5 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:geocoding/geocoding.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:intl/intl.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:sic/controllers/page_index_controller.dart';
 
@@ -19,388 +13,554 @@ class PresensiPage extends StatefulWidget {
 }
 
 class _PresensiPageState extends State<PresensiPage> {
-  File? image;
-  final picker = ImagePicker();
-  String lokasiAbsen = '';
-  double latitude = 0.0;
-  double longitude = 0.0;
-  String tanggalAbsen = '';
-  String waktuAbsen = '';
-  int jamAbsen = 0;
-  int menitAbsen = 0;
-  String statusAbsen = '';
-  double latKantor = -6.945009909734282;
-  double longKantor = 107.75221805398144;
-  double jarakMaksimal = 150.0;
-  double jarakSekarang = 0.0;
-
-  Future getImage() async {
-    final pickedFile = await picker.pickImage(source: ImageSource.camera);
-
-    if (pickedFile != null) {
-      setState(() {
-        image = File(pickedFile.path);
-      });
-
-      setDateTime();
-      setStatusAbsen();
-
-      Get.dialog(
-        const Center(
-            child: CircularProgressIndicator(
-          backgroundColor: Colors.green,
-        )),
-        barrierDismissible: false,
-      );
-
-      await getGeoLocationPosition();
-
-      Get.back();
-
-      Get.defaultDialog(
-        title: "Konfirmasi Presensi",
-        titleStyle: const TextStyle(fontWeight: FontWeight.bold),
-        content: Column(
-          children: [
-            // Preview Gambar
-            ClipRRect(
-              borderRadius: BorderRadius.circular(10),
-              child: Image.file(File(pickedFile.path),
-                  height: 150, fit: BoxFit.cover),
-            ),
-            const SizedBox(height: 15),
-            // Detail Data
-            buildDetailRow("File", pickedFile.name),
-            buildDetailRow("Tanggal", tanggalAbsen),
-            buildDetailRow("Waktu", waktuAbsen),
-            const Divider(),
-            const Text("Lokasi:",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12)),
-            Text(
-              lokasiAbsen.isEmpty ? "Mencari lokasi..." : lokasiAbsen,
-              style: const TextStyle(fontSize: 11),
-              textAlign: TextAlign.center,
-            ),
-          ],
-        ),
-        confirm: ElevatedButton(
-          style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
-          onPressed: () {
-            if (jarakSekarang <= jarakMaksimal) {
-              Get.back();
-              Get.snackbar("Berhasil", "Presensi berhasil dikirim");
-            } else {
-              Get.back();
-              Get.snackbar("Error", "Anda berada di luar area kantor");
-            }
-          },
-          child:
-              const Text("Kirim Absen", style: TextStyle(color: Colors.white)),
-        ),
-        cancel: OutlinedButton(
-          onPressed: () => Get.back(),
-          child: const Text("Batal"),
-        ),
-      );
-    }
-  }
-
-  Widget buildDetailRow(String label, String value,
-      {Color color = Colors.black}) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 2),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text("$label:",
-              style:
-                  const TextStyle(fontWeight: FontWeight.bold, fontSize: 12)),
-          Expanded(
-            child: Text(
-              value,
-              style: TextStyle(
-                  fontSize: 12,
-                  color: color,
-                  fontWeight: color != Colors.black
-                      ? FontWeight.bold
-                      : FontWeight.normal),
-              textAlign: TextAlign.right,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    handleLocationPermission();
-    setDateTime();
-    setStatusAbsen();
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Container(
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            Color(0xff46b83d),
+            Color(0xffd8dbd2),
+          ],
+        ),
+      ),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        body: SafeArea(
+          child: Container(
+              padding: const EdgeInsets.only(
+                  top: 35, bottom: 25, right: 20, left: 20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('Presensi Saya Hari Ini',
-                      style:
-                          TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
-                  Image.asset(
-                    'images/absence.png',
-                    width: 60,
-                    height: 60,
-                  ),
-                ],
-              ),
-              const SizedBox(height: 20),
-              Text('Nama Karyawan', style: TextStyle(fontSize: 18)),
-              const SizedBox(height: 10),
-              Text('NIP Karyawan', style: TextStyle(fontSize: 16)),
-              const SizedBox(height: 30),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
+                  const Text('Attendance History',
+                      style: TextStyle(
+                          fontSize: 28,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white)),
+                  const Text('Track your daily attendance records',
+                      style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.normal,
+                          color: Colors.white70)),
+                  const SizedBox(height: 20),
                   Expanded(
-                    child: Container(
-                        height: 180,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          gradient: LinearGradient(
-                            begin: Alignment.bottomCenter,
-                            end: Alignment.topCenter,
-                            colors: [Color(0xff8de9d5), Color(0xff32c4c0)],
-                          ),
-                        ),
-                        child: const Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Symbols.watch_check,
-                              size: 80,
+                    child: SingleChildScrollView(
+                      physics: const BouncingScrollPhysics(),
+                      child: Column(
+                        children: [
+                          Container(
+                            padding: EdgeInsets.all(20),
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
                               color: Colors.white,
                             ),
-                            const SizedBox(height: 5),
-                            Text(
-                              'Masuk',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              ),
+                            child: Column(
+                              children: [
+                                Row(children: [
+                                  Container(
+                                    width: 60,
+                                    height: 60,
+                                    alignment: Alignment.center,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(15),
+                                        color: Color(0xff46b83d)),
+                                    child: const Icon(
+                                      Symbols.check_circle,
+                                      size: 30,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  const SizedBox(width: 10),
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text('Senin, 25 Desember 2026',
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: TextStyle(
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.bold)),
+                                        Container(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 12, vertical: 4),
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(20),
+                                              color: const Color(0xffe8f5e9),
+                                              border: Border.all(
+                                                  color:
+                                                      const Color(0xffc8e6c9))),
+                                          child: Text('On Time',
+                                              style: TextStyle(
+                                                  color: Color(0xff4caf50),
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 12)),
+                                        )
+                                      ],
+                                    ),
+                                  )
+                                ]),
+                                const SizedBox(height: 20),
+                                Container(
+                                  height: 1,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20),
+                                      color: Colors.black12),
+                                ),
+                                const SizedBox(height: 20),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Expanded(
+                                      child: Container(
+                                        width: double.infinity,
+                                        padding: EdgeInsets.all(10),
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          color: const Color(0xffe8f5e9),
+                                        ),
+                                        child: const Row(
+                                          children: [
+                                            Icon(
+                                              Symbols.login,
+                                              color: Color(0xff4caf50),
+                                              weight: 1000,
+                                            ),
+                                            const SizedBox(width: 10),
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text('Check In',
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w300,
+                                                        fontSize: 16,
+                                                        color:
+                                                            Color(0xff4caf50))),
+                                                Text('08:01:13',
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 18,
+                                                        color:
+                                                            Color(0xff4caf50)))
+                                              ],
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(width: 10),
+                                    Expanded(
+                                      child: Container(
+                                          width: double.infinity,
+                                          padding: EdgeInsets.all(10),
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            color: const Color(0xffffebee),
+                                          ),
+                                          child: const Row(
+                                            children: [
+                                              Icon(
+                                                Symbols.logout,
+                                                color: Color(0xffe53935),
+                                                weight: 1000,
+                                              ),
+                                              const SizedBox(width: 10),
+                                              Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text('Check Out',
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.w300,
+                                                          fontSize: 16,
+                                                          color: Color(
+                                                              0xffe53935))),
+                                                  Text('17:00:25',
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 18,
+                                                          color: Color(
+                                                              0xffe53935)))
+                                                ],
+                                              )
+                                            ],
+                                          )),
+                                    )
+                                  ],
+                                )
+                              ],
                             ),
-                            Text(
-                              'Jam',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        )),
-                  ),
-                  const SizedBox(width: 20),
-                  Expanded(
-                    child: Container(
-                        height: 180,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          gradient: LinearGradient(
-                            begin: Alignment.bottomCenter,
-                            end: Alignment.topCenter,
-                            colors: [Color(0xff9fccfa), Color(0xff0974f1)],
                           ),
-                        ),
-                        child: const Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: const [
-                            Icon(
-                              Symbols.watch_arrow,
-                              size: 80,
+                          const SizedBox(height: 20),
+                          Container(
+                            padding: EdgeInsets.all(20),
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
                               color: Colors.white,
                             ),
-                            const SizedBox(height: 5),
-                            Text(
-                              'Keluar',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              ),
+                            child: Column(
+                              children: [
+                                Row(
+                                  children: [
+                                    Container(
+                                      width: 60,
+                                      height: 60,
+                                      alignment: Alignment.center,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(15),
+                                          color: Color(0xfff57c00)),
+                                      child: const Icon(Symbols.schedule,
+                                          size: 30, color: Colors.white),
+                                    ),
+                                    const SizedBox(width: 10),
+                                    Expanded(
+                                        child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text('Minggu, 24 Desember 2026',
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 20)),
+                                        Container(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 12, vertical: 4),
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(20),
+                                              color: const Color(0xfffff3e0),
+                                              border: Border.all(
+                                                  color:
+                                                      const Color(0xffffe0b2))),
+                                          child: Text('Late',
+                                              style: TextStyle(
+                                                  color: Color(0xfff57c00),
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 12)),
+                                        ),
+                                      ],
+                                    ))
+                                  ],
+                                ),
+                                const SizedBox(height: 20),
+                                Container(
+                                  height: 1,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                    color: Colors.black12,
+                                  ),
+                                ),
+                                const SizedBox(height: 20),
+                                Row(children: [
+                                  Expanded(
+                                    child: Container(
+                                      width: double.infinity,
+                                      padding: EdgeInsets.all(10),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                        color: const Color(0xffe8f5e9),
+                                      ),
+                                      child: const Row(
+                                        children: [
+                                          Icon(
+                                            Symbols.login,
+                                            color: Color(0xff4caf50),
+                                            weight: 1000,
+                                          ),
+                                          const SizedBox(width: 10),
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text('Check In',
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.w300,
+                                                      fontSize: 16,
+                                                      color:
+                                                          Color(0xff4caf50))),
+                                              Text('09:04:48',
+                                                  maxLines: 1,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: 20,
+                                                      color: Color(0xff4caf50)))
+                                            ],
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 10),
+                                  Expanded(
+                                    child: Container(
+                                      width: double.infinity,
+                                      padding: EdgeInsets.all(10),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                        color: const Color(0xffffebee),
+                                      ),
+                                      child: const Row(
+                                        children: [
+                                          Icon(
+                                            Symbols.logout,
+                                            color: Color(0xffe53935),
+                                            weight: 1000,
+                                          ),
+                                          const SizedBox(width: 10),
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text('Check Out',
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.w300,
+                                                      fontSize: 16,
+                                                      color:
+                                                          Color(0xffe53935))),
+                                              Text('17:01:23',
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: 20,
+                                                      color: Color(0xffe53935)))
+                                            ],
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ]),
+                                const SizedBox(height: 20),
+                                Container(
+                                  padding: EdgeInsets.all(10),
+                                  width: double.infinity,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: const Color(0xffffebee)),
+                                  child: const Row(
+                                    children: [
+                                      Icon(
+                                        Symbols.schedule,
+                                        color: Color(0xffe53935),
+                                        weight: 1000,
+                                      ),
+                                      const SizedBox(width: 10),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            'Late',
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w300,
+                                                fontSize: 14,
+                                                color: Color(0xffe53935)),
+                                          ),
+                                          Text(
+                                            '124 Menit',
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 14,
+                                              color: Color(0xffe53935),
+                                            ),
+                                          )
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                )
+                              ],
                             ),
-                            Text(
-                              'Jam',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                              ),
+                          ),
+                          const SizedBox(height: 20),
+                          Container(
+                            padding: EdgeInsets.all(20),
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: Colors.white,
                             ),
-                          ],
-                        )),
-                  ),
+                            child: Column(
+                              children: [
+                                Row(children: [
+                                  Container(
+                                    width: 60,
+                                    height: 60,
+                                    alignment: Alignment.center,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(15),
+                                      color: Color(0xffe53935),
+                                    ),
+                                    child: const Icon(
+                                      Symbols.cancel,
+                                      size: 30,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  const SizedBox(width: 10),
+                                  Expanded(
+                                      child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text('Sabtu, 23 Desember 2026',
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 20)),
+                                      Container(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 12, vertical: 4),
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                          color: const Color(0xffffebee),
+                                          border: Border.all(
+                                            color: const Color(0xffffcdd2),
+                                          ),
+                                        ),
+                                        child: Text(
+                                          'Absent',
+                                          style: TextStyle(
+                                              color: Color(0xffe53935),
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 12),
+                                        ),
+                                      )
+                                    ],
+                                  ))
+                                ]),
+                                const SizedBox(height: 20),
+                                Container(
+                                  height: 1,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20),
+                                      color: Colors.black12),
+                                ),
+                                const SizedBox(height: 20),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Expanded(
+                                      child: Container(
+                                        width: double.infinity,
+                                        padding: EdgeInsets.all(10),
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          color: const Color(0xffe8f5e9),
+                                        ),
+                                        child: const Row(
+                                          children: [
+                                            Icon(
+                                              Symbols.login,
+                                              color: Color(0xff4caf50),
+                                              weight: 1000,
+                                            ),
+                                            const SizedBox(width: 10),
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text('Check In',
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w300,
+                                                        fontSize: 16,
+                                                        color:
+                                                            Color(0xff4caf50))),
+                                                Text('08:01:13',
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 18,
+                                                        color:
+                                                            Color(0xff4caf50)))
+                                              ],
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(width: 10),
+                                    Expanded(
+                                      child: Container(
+                                        width: double.infinity,
+                                        padding: EdgeInsets.all(10),
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          color: const Color(0xffffebee),
+                                        ),
+                                        child: const Row(
+                                          children: [
+                                            Icon(
+                                              Symbols.logout,
+                                              color: Color(0xffe53935),
+                                              weight: 1000,
+                                            ),
+                                            const SizedBox(width: 10),
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text('Check Out',
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w300,
+                                                        fontSize: 16,
+                                                        color:
+                                                            Color(0xffe53935))),
+                                                Text(
+                                                  '-',
+                                                  style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 18,
+                                                    color: Color(0xffe53935),
+                                                  ),
+                                                )
+                                              ],
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                )
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  )
                 ],
-              ),
-              const SizedBox(height: 30),
-              Container(
-                  width: double.infinity,
-                  height: 60,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      gradient: const LinearGradient(
-                          colors: [Colors.green, Colors.lightGreenAccent])),
-                  child: TextButton(
-                      style:
-                          TextButton.styleFrom(foregroundColor: Colors.white),
-                      onPressed: getImage,
-                      child: const Text('Absen')))
-            ],
-          ),
+              )),
         ),
       ),
     );
-  }
-
-  Future<void> getGeoLocationPosition() async {
-    try {
-      Position position = await Geolocator.getCurrentPosition(
-          desiredAccuracy: LocationAccuracy.high);
-      await getAddressFromLongLat(position);
-    } catch (e) {
-      print("Error ambil lokasi: $e");
-      setState(() {
-        lokasiAbsen = "Gagal mendapatkan lokasi";
-      });
-    }
-  }
-
-  Future<void> getAddressFromLongLat(Position position) async {
-    List<Placemark> placemarks =
-        await placemarkFromCoordinates(position.latitude, position.longitude);
-    print(placemarks);
-    Placemark place = placemarks[0];
-    setState(() {
-      lokasiAbsen =
-          '${place.street}, ${place.subLocality}, ${place.locality}, ${place.postalCode}, ${place.country}';
-      latitude = position.latitude;
-      longitude = position.longitude;
-      jarakSekarang = Geolocator.distanceBetween(
-          latKantor, longKantor, latitude, longitude);
-    });
-  }
-
-  // untuk menangani permission lokasi
-  Future<bool> handleLocationPermission() async {
-    bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    if (!serviceEnabled) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Row(
-          children: [
-            Icon(
-              Icons.location_off,
-              color: Colors.white,
-            ),
-            SizedBox(width: 10),
-            Text(
-              "Location services are disabled. Please enable the services.",
-              style: TextStyle(color: Colors.white),
-            )
-          ],
-        ),
-        backgroundColor: Colors.redAccent,
-        shape: StadiumBorder(),
-        behavior: SnackBarBehavior.floating,
-      ));
-      return false;
-    }
-
-    LocationPermission permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-      if (permission == LocationPermission.denied) {
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-          content: Row(
-            children: [
-              Icon(
-                Icons.location_off,
-                color: Colors.white,
-              ),
-              SizedBox(width: 10),
-              Text(
-                "Location permissions are denied",
-                style: TextStyle(color: Colors.white),
-              )
-            ],
-          ),
-          backgroundColor: Colors.redAccent,
-          shape: StadiumBorder(),
-          behavior: SnackBarBehavior.floating,
-        ));
-        return false;
-      }
-    }
-
-    if (permission == LocationPermission.deniedForever) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Row(
-          children: [
-            Icon(
-              Icons.location_off,
-              color: Colors.white,
-            ),
-            SizedBox(width: 10),
-            Text(
-              "Location permissions are permanently denied, we cannot request permissions.",
-              style: TextStyle(color: Colors.white),
-            )
-          ],
-        ),
-        backgroundColor: Colors.redAccent,
-        shape: StadiumBorder(),
-        behavior: SnackBarBehavior.floating,
-      ));
-      return false;
-    }
-    return true;
-  }
-
-  // untuk mengatur format tanggal dan waktu
-  void setDateTime() async {
-    var dateNow = DateTime.now();
-    var dateFormat = DateFormat('dd MMMM yyyy');
-    var timeFormat = DateFormat('HH:mm:ss');
-    var hourFormat = DateFormat('HH');
-    var minuteFormat = DateFormat('mm');
-
-    setState(() {
-      tanggalAbsen = dateFormat.format(dateNow);
-      waktuAbsen = timeFormat.format(dateNow);
-      jamAbsen = int.parse(hourFormat.format(dateNow));
-      menitAbsen = int.parse(minuteFormat.format(dateNow));
-    });
-  }
-
-  // untuk status absen
-  void setStatusAbsen() {
-    if (jamAbsen < 8 || (jamAbsen == 8 && menitAbsen <= 30)) {
-      statusAbsen = "Absen Masuk";
-    } else if ((jamAbsen > 8 && jamAbsen < 18) ||
-        (jamAbsen == 8 && menitAbsen >= 31)) {
-      statusAbsen = "Absen Telat";
-    } else {
-      statusAbsen = "Absen Keluar";
-    }
   }
 }
