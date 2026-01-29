@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:sic/controllers/page_index_controller.dart';
@@ -35,14 +36,14 @@ class _PresensiPageState extends State<PresensiPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('Attendance History',
+                  Text('Attendance History',
                       style: TextStyle(
-                          fontSize: 28,
+                          fontSize: 28.sp,
                           fontWeight: FontWeight.bold,
                           color: Colors.white)),
-                  const Text('Track your daily attendance records',
+                  Text('Track your daily attendance records',
                       style: TextStyle(
-                          fontSize: 14,
+                          fontSize: 14.sp,
                           fontWeight: FontWeight.normal,
                           color: Colors.white70)),
                   const SizedBox(height: 20),
@@ -84,7 +85,7 @@ class _PresensiPageState extends State<PresensiPage> {
                                             maxLines: 1,
                                             overflow: TextOverflow.ellipsis,
                                             style: TextStyle(
-                                                fontSize: 20,
+                                                fontSize: 16.sp,
                                                 fontWeight: FontWeight.bold)),
                                         Container(
                                           padding: const EdgeInsets.symmetric(
@@ -100,7 +101,7 @@ class _PresensiPageState extends State<PresensiPage> {
                                               style: TextStyle(
                                                   color: Color(0xff4caf50),
                                                   fontWeight: FontWeight.bold,
-                                                  fontSize: 12)),
+                                                  fontSize: 12.sp)),
                                         )
                                       ],
                                     ),
@@ -127,7 +128,7 @@ class _PresensiPageState extends State<PresensiPage> {
                                               BorderRadius.circular(10),
                                           color: const Color(0xffe8f5e9),
                                         ),
-                                        child: const Row(
+                                        child: Row(
                                           children: [
                                             Icon(
                                               Symbols.login,
@@ -143,14 +144,14 @@ class _PresensiPageState extends State<PresensiPage> {
                                                     style: TextStyle(
                                                         fontWeight:
                                                             FontWeight.w300,
-                                                        fontSize: 16,
+                                                        fontSize: 14.sp,
                                                         color:
                                                             Color(0xff4caf50))),
                                                 Text('08:01:13',
                                                     style: TextStyle(
                                                         fontWeight:
                                                             FontWeight.bold,
-                                                        fontSize: 18,
+                                                        fontSize: 16.sp,
                                                         color:
                                                             Color(0xff4caf50)))
                                               ],
@@ -169,7 +170,7 @@ class _PresensiPageState extends State<PresensiPage> {
                                                 BorderRadius.circular(10),
                                             color: const Color(0xffffebee),
                                           ),
-                                          child: const Row(
+                                          child: Row(
                                             children: [
                                               Icon(
                                                 Symbols.logout,
@@ -185,14 +186,14 @@ class _PresensiPageState extends State<PresensiPage> {
                                                       style: TextStyle(
                                                           fontWeight:
                                                               FontWeight.w300,
-                                                          fontSize: 16,
+                                                          fontSize: 14.sp,
                                                           color: Color(
                                                               0xffe53935))),
                                                   Text('17:00:25',
                                                       style: TextStyle(
                                                           fontWeight:
                                                               FontWeight.bold,
-                                                          fontSize: 18,
+                                                          fontSize: 16.sp,
                                                           color: Color(
                                                               0xffe53935)))
                                                 ],
@@ -239,7 +240,7 @@ class _PresensiPageState extends State<PresensiPage> {
                                             overflow: TextOverflow.ellipsis,
                                             style: TextStyle(
                                                 fontWeight: FontWeight.bold,
-                                                fontSize: 20)),
+                                                fontSize: 16.sp)),
                                         Container(
                                           padding: const EdgeInsets.symmetric(
                                               horizontal: 12, vertical: 4),
@@ -254,7 +255,7 @@ class _PresensiPageState extends State<PresensiPage> {
                                               style: TextStyle(
                                                   color: Color(0xfff57c00),
                                                   fontWeight: FontWeight.bold,
-                                                  fontSize: 12)),
+                                                  fontSize: 12.sp)),
                                         ),
                                       ],
                                     ))
@@ -278,7 +279,7 @@ class _PresensiPageState extends State<PresensiPage> {
                                         borderRadius: BorderRadius.circular(10),
                                         color: const Color(0xffe8f5e9),
                                       ),
-                                      child: const Row(
+                                      child: Row(
                                         children: [
                                           Icon(
                                             Symbols.login,
@@ -294,7 +295,7 @@ class _PresensiPageState extends State<PresensiPage> {
                                                   style: TextStyle(
                                                       fontWeight:
                                                           FontWeight.w300,
-                                                      fontSize: 16,
+                                                      fontSize: 14.sp,
                                                       color:
                                                           Color(0xff4caf50))),
                                               Text('09:04:48',
@@ -304,7 +305,7 @@ class _PresensiPageState extends State<PresensiPage> {
                                                   style: TextStyle(
                                                       fontWeight:
                                                           FontWeight.bold,
-                                                      fontSize: 20,
+                                                      fontSize: 16.sp,
                                                       color: Color(0xff4caf50)))
                                             ],
                                           )
@@ -321,7 +322,7 @@ class _PresensiPageState extends State<PresensiPage> {
                                         borderRadius: BorderRadius.circular(10),
                                         color: const Color(0xffffebee),
                                       ),
-                                      child: const Row(
+                                      child: Row(
                                         children: [
                                           Icon(
                                             Symbols.logout,
@@ -337,14 +338,14 @@ class _PresensiPageState extends State<PresensiPage> {
                                                   style: TextStyle(
                                                       fontWeight:
                                                           FontWeight.w300,
-                                                      fontSize: 16,
+                                                      fontSize: 14.sp,
                                                       color:
                                                           Color(0xffe53935))),
                                               Text('17:01:23',
                                                   style: TextStyle(
                                                       fontWeight:
                                                           FontWeight.bold,
-                                                      fontSize: 20,
+                                                      fontSize: 16.sp,
                                                       color: Color(0xffe53935)))
                                             ],
                                           )
@@ -360,7 +361,7 @@ class _PresensiPageState extends State<PresensiPage> {
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(10),
                                       color: const Color(0xffffebee)),
-                                  child: const Row(
+                                  child: Row(
                                     children: [
                                       Icon(
                                         Symbols.schedule,
@@ -376,14 +377,14 @@ class _PresensiPageState extends State<PresensiPage> {
                                             'Late',
                                             style: TextStyle(
                                                 fontWeight: FontWeight.w300,
-                                                fontSize: 14,
+                                                fontSize: 14.sp,
                                                 color: Color(0xffe53935)),
                                           ),
                                           Text(
                                             '124 Menit',
                                             style: TextStyle(
                                               fontWeight: FontWeight.bold,
-                                              fontSize: 14,
+                                              fontSize: 14.sp,
                                               color: Color(0xffe53935),
                                             ),
                                           )
@@ -426,10 +427,14 @@ class _PresensiPageState extends State<PresensiPage> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Text('Sabtu, 23 Desember 2026',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 20)),
+                                      Text(
+                                        'Sabtu, 23 Desember 2026',
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 16.sp),
+                                      ),
                                       Container(
                                         padding: const EdgeInsets.symmetric(
                                             horizontal: 12, vertical: 4),
@@ -446,7 +451,7 @@ class _PresensiPageState extends State<PresensiPage> {
                                           style: TextStyle(
                                               color: Color(0xffe53935),
                                               fontWeight: FontWeight.bold,
-                                              fontSize: 12),
+                                              fontSize: 12.sp),
                                         ),
                                       )
                                     ],
@@ -473,7 +478,7 @@ class _PresensiPageState extends State<PresensiPage> {
                                               BorderRadius.circular(10),
                                           color: const Color(0xffe8f5e9),
                                         ),
-                                        child: const Row(
+                                        child: Row(
                                           children: [
                                             Icon(
                                               Symbols.login,
@@ -489,14 +494,14 @@ class _PresensiPageState extends State<PresensiPage> {
                                                     style: TextStyle(
                                                         fontWeight:
                                                             FontWeight.w300,
-                                                        fontSize: 16,
+                                                        fontSize: 14.sp,
                                                         color:
                                                             Color(0xff4caf50))),
                                                 Text('08:01:13',
                                                     style: TextStyle(
                                                         fontWeight:
                                                             FontWeight.bold,
-                                                        fontSize: 18,
+                                                        fontSize: 16.sp,
                                                         color:
                                                             Color(0xff4caf50)))
                                               ],
@@ -515,7 +520,7 @@ class _PresensiPageState extends State<PresensiPage> {
                                               BorderRadius.circular(10),
                                           color: const Color(0xffffebee),
                                         ),
-                                        child: const Row(
+                                        child: Row(
                                           children: [
                                             Icon(
                                               Symbols.logout,
@@ -531,14 +536,14 @@ class _PresensiPageState extends State<PresensiPage> {
                                                     style: TextStyle(
                                                         fontWeight:
                                                             FontWeight.w300,
-                                                        fontSize: 16,
+                                                        fontSize: 14.sp,
                                                         color:
                                                             Color(0xffe53935))),
                                                 Text(
                                                   '-',
                                                   style: TextStyle(
                                                     fontWeight: FontWeight.bold,
-                                                    fontSize: 18,
+                                                    fontSize: 16.sp,
                                                     color: Color(0xffe53935),
                                                   ),
                                                 )

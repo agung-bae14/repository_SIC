@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:material_symbols_icons/symbols.dart';
 import 'package:sic/controllers/page_index_controller.dart';
@@ -26,14 +27,15 @@ class ProfilePage extends StatelessWidget {
         backgroundColor: Colors.transparent,
         body: SafeArea(
           child: Container(
-            padding: const EdgeInsets.only(top: 35,bottom: 20,left: 20,right: 20),
+            padding:
+                const EdgeInsets.only(top: 35, bottom: 20, left: 20, right: 20),
             child: Column(
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const Expanded(
+                    Expanded(
                       flex: 3,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -41,14 +43,14 @@ class ProfilePage extends StatelessWidget {
                           Text(
                             'My Profile',
                             style: TextStyle(
-                                fontSize: 28,
+                                fontSize: 28.sp,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white),
                           ),
                           Text(
                             'Welcome to your profile page.',
                             style: TextStyle(
-                                fontSize: 14,
+                                fontSize: 14.sp,
                                 fontWeight: FontWeight.normal,
                                 color: Colors.white70),
                           ),
@@ -100,6 +102,7 @@ class ProfilePage extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Container(
+                                padding: EdgeInsets.all(4),
                                 width: 160,
                                 height: 160,
                                 decoration: BoxDecoration(
@@ -108,24 +111,28 @@ class ProfilePage extends StatelessWidget {
                                     color: Color(0xff46b83d),
                                     width: 4,
                                   ),
-                                  image: const DecorationImage(
-                                    image: NetworkImage(
-                                        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSPvR01BarBRFD3EMnr9KTHVHl66807R0zZg&s'),
+                                ),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(80),
+                                  child: Image.network(
+                                    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSPvR01BarBRFD3EMnr9KTHVHl66807R0zZg&s',
                                     fit: BoxFit.cover,
                                   ),
                                 ),
                               ),
                               const SizedBox(height: 20),
-                              const Text(
+                              Text(
                                 'Nama Karyawan',
                                 style: TextStyle(
-                                    fontSize: 22, fontWeight: FontWeight.bold),
+                                    fontSize: 18.sp,
+                                    fontWeight: FontWeight.bold),
                               ),
                               const SizedBox(height: 10),
-                              const Text(
+                              Text(
                                 'Kategori',
                                 style: TextStyle(
-                                    fontSize: 16, fontWeight: FontWeight.w500),
+                                    fontSize: 12.sp,
+                                    fontWeight: FontWeight.w500),
                               ),
                             ],
                           ),
@@ -159,10 +166,10 @@ class ProfilePage extends StatelessWidget {
                                     ),
                                   ),
                                   const SizedBox(width: 15),
-                                  const Text(
+                                  Text(
                                     'Personal Information',
                                     style: TextStyle(
-                                        fontSize: 20,
+                                        fontSize: 16.sp,
                                         fontWeight: FontWeight.bold),
                                   ),
                                 ],
@@ -210,10 +217,10 @@ class ProfilePage extends StatelessWidget {
                                   onPressed: () {
                                     Get.toNamed(Routes.EDIT_PROFILE);
                                   },
-                                  child: const Text(
+                                  child: Text(
                                     'Edit Profile',
                                     style: TextStyle(
-                                        fontSize: 16,
+                                        fontSize: 14.sp,
                                         fontWeight: FontWeight.bold),
                                   ),
                                 ),
@@ -249,7 +256,7 @@ class CardProfileDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 80,
+      height: 100,
       padding: const EdgeInsets.all(15),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
@@ -281,17 +288,17 @@ class CardProfileDetail extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: const TextStyle(
-                      fontSize: 14,
+                  style: TextStyle(
+                      fontSize: 12.sp,
                       fontWeight: FontWeight.w500,
                       color: Color(0xff43493f)),
                 ),
                 Text(
                   subtitle,
                   overflow: TextOverflow.ellipsis,
-                  maxLines: 2,
-                  style: const TextStyle(
-                      fontSize: 16,
+                  maxLines: 1,
+                  style: TextStyle(
+                      fontSize: 14.sp,
                       fontWeight: FontWeight.bold,
                       color: Color(0xff191d17)),
                 ),

@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:sic/modules/edit_profile/views/edit_profile_page.dart';
+import 'package:sic/modules/home/bindings/home_binding.dart';
 
 import 'package:sic/modules/login/views/login_page.dart';
 import 'package:sic/modules/presensi/views/presensi_page.dart';
@@ -12,7 +13,11 @@ class AppPages {
   AppPages._();
 
   static final pages = <GetPage>[
-    GetPage(name: _Paths.HOME, page: () => MainWrapper()),
+    GetPage(
+      name: _Paths.HOME,
+      page: () => MainWrapper(),
+      binding: HomeBinding(),
+    ),
     GetPage(name: _Paths.LOGIN, page: () => LoginPage()),
     GetPage(name: _Paths.PRESENSI, page: () => PresensiPage()),
     GetPage(name: _Paths.PROFILE, page: () => ProfilePage()),

@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:material_symbols_icons/symbols.dart';
@@ -62,21 +63,21 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     ),
                   ),
                   const SizedBox(width: 15),
-                  const Column(
+                  Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
                         'Edit Profile',
                         style: TextStyle(
-                            fontSize: 28,
+                            fontSize: 28.sp,
                             fontWeight: FontWeight.bold,
                             color: Colors.white),
                       ),
                       Text(
                         'Update your personal information',
                         style: TextStyle(
-                            fontSize: 14,
+                            fontSize: 14.sp,
                             fontWeight: FontWeight.normal,
                             color: Colors.white70),
                       ),
@@ -87,7 +88,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
               const SizedBox(height: 20),
               Expanded(
                   child: SingleChildScrollView(
-                physics: const BouncingScrollPhysics(),
+                physics: const ClampingScrollPhysics(),
                 child: Column(
                   children: [
                     Container(
@@ -117,21 +118,21 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                 ),
                               ),
                               const SizedBox(width: 15),
-                              const Column(
+                              Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
                                     'Profile Picture',
                                     style: TextStyle(
-                                        fontSize: 18,
+                                        fontSize: 16.sp,
                                         fontWeight: FontWeight.bold,
                                         color: Colors.black),
                                   ),
                                   Text(
                                     'Upload or update your profile picture',
                                     style: TextStyle(
-                                        fontSize: 14,
+                                        fontSize: 12.sp,
                                         fontWeight: FontWeight.normal,
                                         color: Colors.black45),
                                   ),
@@ -140,10 +141,10 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             ],
                           ),
                           const SizedBox(height: 20),
-                          const Text(
+                          Text(
                             'Choose profile picture',
                             style: TextStyle(
-                                fontSize: 16,
+                                fontSize: 14.sp,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.black),
                           ),
@@ -189,7 +190,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                     onPressed: () => Get.defaultDialog(
                                       title: 'Pilih Gambar',
                                       middleText: '',
-                                      titleStyle: const TextStyle(fontSize: 16),
+                                      titleStyle: TextStyle(fontSize: 14.sp),
                                       content: const SizedBox(height: 0),
                                       confirm: TextButton(
                                           onPressed: () {
@@ -208,10 +209,10 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                               style: TextStyle(
                                                   color: Colors.black))),
                                     ),
-                                    child: const Text(
+                                    child: Text(
                                       'Pilih Foto',
                                       style: TextStyle(
-                                          fontSize: 16,
+                                          fontSize: 14.sp,
                                           fontWeight: FontWeight.bold),
                                     ),
                                   ),
@@ -250,21 +251,21 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                 ),
                               ),
                               const SizedBox(width: 15),
-                              const Column(
+                              Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
                                     'Personal Detail',
                                     style: TextStyle(
-                                        fontSize: 18,
+                                        fontSize: 16.sp,
                                         fontWeight: FontWeight.bold,
                                         color: Colors.black),
                                   ),
                                   Text(
                                     'update your personal information',
                                     style: TextStyle(
-                                        fontSize: 14, color: Colors.black45),
+                                        fontSize: 12.sp, color: Colors.black45),
                                   )
                                 ],
                               )
@@ -276,11 +277,11 @@ class _EditProfilePageState extends State<EditProfilePage> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  const Text(
+                                  Text(
                                     'Full Name',
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
-                                        fontSize: 16,
+                                        fontSize: 14.sp,
                                         color: Colors.black),
                                   ),
                                   CardProfileForm(
@@ -295,11 +296,11 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                     },
                                   ),
                                   const SizedBox(height: 10),
-                                  const Text(
+                                  Text(
                                     'Email',
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
-                                      fontSize: 16,
+                                      fontSize: 14.sp,
                                       color: Colors.black,
                                     ),
                                   ),
@@ -310,31 +311,31 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                     validator: (value) {
                                       if (value == null || value.isEmpty) {
                                         return 'Please enter your email';
-                                      } else if(!GetUtils.isEmail(value)) {
+                                      } else if (!GetUtils.isEmail(value)) {
                                         return 'Invalid email format';
                                       }
                                       return null;
                                     },
                                   ),
                                   const SizedBox(height: 10),
-                                  const Text(
+                                  Text(
                                     'Phone Number',
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
-                                        fontSize: 16,
+                                        fontSize: 14.sp,
                                         color: Colors.black),
                                   ),
                                   CardProfileForm(
-                                      icon: Symbols.phone,
-                                      keyboardType: TextInputType.phone,
-                                      controller: _nomorController,
-                                      validator: (value) {
-                                        if (value == null || value.isEmpty) {
-                                          return 'Please enter your phone number';
-                                        }
-                                        return null;
-                                      },
-                                      ),
+                                    icon: Symbols.phone,
+                                    keyboardType: TextInputType.phone,
+                                    controller: _nomorController,
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty) {
+                                        return 'Please enter your phone number';
+                                      }
+                                      return null;
+                                    },
+                                  ),
                                 ],
                               )),
                           const SizedBox(height: 20),
@@ -352,16 +353,18 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                   Get.back();
                                 }
                               },
-                              child: const Text(
+                              child: Text(
                                 'Update Profile',
                                 style: TextStyle(
-                                    fontSize: 16, fontWeight: FontWeight.bold),
+                                    fontSize: 14.sp,
+                                    fontWeight: FontWeight.bold),
                               ),
                             ),
                           )
                         ],
                       ),
-                    )
+                    ),
+                    const SizedBox(height: 10),
                   ],
                 ),
               ))
@@ -427,14 +430,14 @@ class CardProfileForm extends StatelessWidget {
               controller: controller,
               validator: validator,
               keyboardType: keyboardType,
-              style: const TextStyle(
-                fontSize: 16,
+              style: TextStyle(
+                fontSize: 14.sp,
                 fontWeight: FontWeight.bold,
                 color: Colors.black,
               ),
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                 labelStyle: TextStyle(
-                  fontSize: 16,
+                  fontSize: 14.sp,
                   color: Colors.black,
                 ),
                 border: InputBorder.none,
