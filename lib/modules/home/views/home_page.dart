@@ -1,16 +1,33 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:sic/controllers/page_index_controller.dart';
 import 'package:sic/modules/home/controllers/home_controller.dart';
-import 'package:sic/widget/card_user.dart';
-import 'package:sic/widget/menu_widget.dart';
+import 'package:sic/routes/app_pages.dart';
 
 final pages = Get.find<PageIndexController>();
 
-class HomePage extends GetView<HomeController> {
-  HomePage({Key? key}) : super(key: key);
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  final picker = ImagePicker();
+  File? image;
+  late HomeController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = Get.find<HomeController>();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -111,8 +128,8 @@ class HomePage extends GetView<HomeController> {
                             children: [
                               Row(
                                 children: [
-                                  Icon(Symbols.home_repair_service,
-                                      color: Colors.white),
+                                  Icon(Symbols.badge,
+                                      fill: 1, color: Colors.white),
                                   const SizedBox(width: 5),
                                   Text(
                                     'Role:',
@@ -134,8 +151,8 @@ class HomePage extends GetView<HomeController> {
                               const SizedBox(height: 5),
                               Row(
                                 children: [
-                                  Icon(Symbols.corporate_fare,
-                                      color: Colors.white),
+                                  Icon(Symbols.domain,
+                                      fill: 1, color: Colors.white),
                                   const SizedBox(width: 5),
                                   Text(
                                     'Dept:',
@@ -157,7 +174,8 @@ class HomePage extends GetView<HomeController> {
                               const SizedBox(height: 5),
                               Row(
                                 children: [
-                                  Icon(Symbols.schedule, color: Colors.white),
+                                  Icon(Symbols.schedule,
+                                      fill: 1, color: Colors.white),
                                   const SizedBox(width: 5),
                                   Text(
                                     'Shift:',
@@ -168,7 +186,7 @@ class HomePage extends GetView<HomeController> {
                                   ),
                                   const SizedBox(width: 5),
                                   Text(
-                                    'Pagi',
+                                    '2',
                                     style: TextStyle(
                                         fontSize: 13.sp,
                                         fontWeight: FontWeight.bold,
@@ -271,7 +289,6 @@ class HomePage extends GetView<HomeController> {
                   Container(
                     padding: EdgeInsets.all(25),
                     width: double.infinity,
-                    height: 200,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15),
                       color: Colors.white,
@@ -302,8 +319,40 @@ class HomePage extends GetView<HomeController> {
                             ),
                           ],
                         ),
-                        Row(
-                          children: [],
+                        const SizedBox(height: 30),
+                        GridView.count(
+                          crossAxisCount: 2,
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          crossAxisSpacing: 15,
+                          mainAxisSpacing: 15,
+                          childAspectRatio: 1,
+                          children: [
+                            MenuButton(
+                              color: const Color(0xff46b83d),
+                              icon: Symbols.login,
+                              label: 'Check In',
+                              onTap: () {getImage(ImageSource.camera);},
+                            ),
+                            MenuButton(
+                              color: const Color(0xffe74c3c),
+                              icon: Symbols.logout,
+                              label: 'Check Out',
+                              onTap: () {getImage(ImageSource.camera);},
+                            ),
+                            MenuButton(
+                              color: const Color(0xff3498db),
+                              icon: Symbols.event_busy,
+                              label: 'Leave',
+                              onTap: () {Get.toNamed(Routes.LEAVE);},
+                            ),
+                            MenuButton(
+                              color: const Color(0xfff39c12),
+                              icon: Symbols.schedule,
+                              label: 'Overtime',
+                              onTap: () {Get.toNamed(Routes.OVERTIME);},
+                            ),
+                          ],
                         )
                       ],
                     ),
@@ -312,6 +361,79 @@ class HomePage extends GetView<HomeController> {
               ),
             ),
           ),
+        ),
+      ),
+    );
+  }
+
+  Future getImage(ImageSource source) async {
+    final pickedFile = await picker.pickImage(source: source);
+
+    if (pickedFile != null) {
+      setState(() {
+        image = File(pickedFile.path);
+      });
+    } else {}
+  }
+}
+
+class MenuButton extends StatelessWidget {
+  final Color color;
+  final IconData icon;
+  final String label;
+  final VoidCallback onTap;
+
+  const MenuButton({
+    super.key,
+    required this.color,
+    required this.icon,
+    required this.label,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.all(25),
+        width: 140.w,
+        height: 140.w,
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(30),
+          color: color,
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              width: 60,
+              height: 60,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: Colors.white.withOpacity(0.2),
+                  border: Border.all(
+                    color: Colors.white.withOpacity(0.3),
+                    width: 1,
+                  )),
+              child: Icon(
+                icon,
+                size: 25,
+                fill: 1,
+                color: Color(0xffffffff),
+              ),
+            ),
+            const SizedBox(height: 5),
+            Text(
+              label,
+              style: TextStyle(
+                fontSize: 15.sp,
+                color: Colors.white,
+              ),
+            ),
+          ],
         ),
       ),
     );

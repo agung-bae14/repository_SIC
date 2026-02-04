@@ -181,9 +181,9 @@ class ProfilePage extends StatelessWidget {
                                   subtitle: 'Agung Muhammad Albaehaqi'),
                               const SizedBox(height: 15),
                               const CardProfileDetail(
-                                  icon: Symbols.email,
-                                  title: 'Email',
-                                  subtitle: 'agung@example.com'),
+                                  icon: Symbols.add_home,
+                                  title: 'Alamat',
+                                  subtitle: 'Desa Dawuan Kabupaten Majalengka'),
                               const SizedBox(height: 15),
                               const CardProfileDetail(
                                   icon: Symbols.phone,
@@ -203,7 +203,7 @@ class ProfilePage extends StatelessWidget {
                               const CardProfileDetail(
                                   icon: Symbols.nest_clock_farsight_analog,
                                   title: 'Shift',
-                                  subtitle: '1'),
+                                  subtitle: '2'),
                               const SizedBox(height: 25),
                               Container(
                                 width: double.infinity,

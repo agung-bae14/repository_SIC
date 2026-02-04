@@ -1,10 +1,13 @@
 import 'package:get/get.dart';
 import 'package:sic/modules/edit_profile/views/edit_profile_page.dart';
 import 'package:sic/modules/home/bindings/home_binding.dart';
+import 'package:sic/modules/leave/views/leave_page.dart';
 
 import 'package:sic/modules/login/views/login_page.dart';
+import 'package:sic/modules/overtime/views/overtime_page.dart';
 import 'package:sic/modules/presensi/views/presensi_page.dart';
 import 'package:sic/modules/profile/views/profile_page.dart';
+import 'package:sic/modules/req_leave/views/req_leave_page.dart';
 import 'package:sic/pages/main_wrapper.dart';
 
 part 'app_routes.dart';
@@ -21,6 +24,9 @@ class AppPages {
     GetPage(name: _Paths.LOGIN, page: () => LoginPage()),
     GetPage(name: _Paths.PRESENSI, page: () => PresensiPage()),
     GetPage(name: _Paths.PROFILE, page: () => ProfilePage()),
-    GetPage(name: _Paths.EDIT_PROFILE, page: () => EditProfilePage())
+    GetPage(name: _Paths.EDIT_PROFILE, page: () => EditProfilePage()),
+    GetPage(name: _Paths.LEAVE, page: () => LeavePage()),
+    GetPage(name: _Paths.REQ_LEAVE, page: () => ReqLeavePage()),
+    GetPage(name: _Paths.OVERTIME, page: () => OvertimePage()),
   ];
 }

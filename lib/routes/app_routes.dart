@@ -7,6 +7,9 @@ abstract class Routes {
   static const PRESENSI = _Paths.PRESENSI;
   static const PROFILE = _Paths.PROFILE;
   static const EDIT_PROFILE = _Paths.EDIT_PROFILE;
+  static const LEAVE = _Paths.LEAVE;
+  static const REQ_LEAVE = _Paths.REQ_LEAVE;
+  static const OVERTIME = _Paths.OVERTIME;
 }
 
 abstract class _Paths {
@@ -16,4 +19,7 @@ abstract class _Paths {
   static const PRESENSI = '/presensi';
   static const PROFILE = '/profile';
   static const EDIT_PROFILE = '/edit-profile';
+  static const LEAVE = '/leave';
+  static const REQ_LEAVE = '/req-leave';
+  static const OVERTIME = '/overtime';
 }

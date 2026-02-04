@@ -16,7 +16,7 @@ class EditProfilePage extends StatefulWidget {
 class _EditProfilePageState extends State<EditProfilePage> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _alamatController = TextEditingController();
   final TextEditingController _nomorController = TextEditingController();
   File? image;
   final picker = ImagePicker();
@@ -297,7 +297,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                   ),
                                   const SizedBox(height: 10),
                                   Text(
-                                    'Email',
+                                    'alamat',
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 14.sp,
@@ -305,9 +305,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                     ),
                                   ),
                                   CardProfileForm(
-                                    icon: Symbols.email,
-                                    keyboardType: TextInputType.emailAddress,
-                                    controller: _emailController,
+                                    icon: Symbols.add_home,
+                                    keyboardType: TextInputType.text,
+                                    controller: _alamatController,
                                     validator: (value) {
                                       if (value == null || value.isEmpty) {
                                         return 'Please enter your email';

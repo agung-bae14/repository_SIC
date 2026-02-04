@@ -52,512 +52,25 @@ class _PresensiPageState extends State<PresensiPage> {
                       physics: const BouncingScrollPhysics(),
                       child: Column(
                         children: [
-                          Container(
-                            padding: EdgeInsets.all(20),
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              color: Colors.white,
-                            ),
-                            child: Column(
-                              children: [
-                                Row(children: [
-                                  Container(
-                                    width: 60,
-                                    height: 60,
-                                    alignment: Alignment.center,
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(15),
-                                        color: Color(0xff46b83d)),
-                                    child: const Icon(
-                                      Symbols.check_circle,
-                                      size: 30,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  const SizedBox(width: 10),
-                                  Expanded(
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text('Senin, 25 Desember 2026',
-                                            maxLines: 1,
-                                            overflow: TextOverflow.ellipsis,
-                                            style: TextStyle(
-                                                fontSize: 16.sp,
-                                                fontWeight: FontWeight.bold)),
-                                        Container(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 12, vertical: 4),
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(20),
-                                              color: const Color(0xffe8f5e9),
-                                              border: Border.all(
-                                                  color:
-                                                      const Color(0xffc8e6c9))),
-                                          child: Text('On Time',
-                                              style: TextStyle(
-                                                  color: Color(0xff4caf50),
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 12.sp)),
-                                        )
-                                      ],
-                                    ),
-                                  )
-                                ]),
-                                const SizedBox(height: 20),
-                                Container(
-                                  height: 1,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20),
-                                      color: Colors.black12),
-                                ),
-                                const SizedBox(height: 20),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Expanded(
-                                      child: Container(
-                                        width: double.infinity,
-                                        padding: EdgeInsets.all(10),
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          color: const Color(0xffe8f5e9),
-                                        ),
-                                        child: Row(
-                                          children: [
-                                            Icon(
-                                              Symbols.login,
-                                              color: Color(0xff4caf50),
-                                              weight: 1000,
-                                            ),
-                                            const SizedBox(width: 10),
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text('Check In',
-                                                    style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.w300,
-                                                        fontSize: 14.sp,
-                                                        color:
-                                                            Color(0xff4caf50))),
-                                                Text('08:01:13',
-                                                    style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontSize: 16.sp,
-                                                        color:
-                                                            Color(0xff4caf50)))
-                                              ],
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                    const SizedBox(width: 10),
-                                    Expanded(
-                                      child: Container(
-                                          width: double.infinity,
-                                          padding: EdgeInsets.all(10),
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            color: const Color(0xffffebee),
-                                          ),
-                                          child: Row(
-                                            children: [
-                                              Icon(
-                                                Symbols.logout,
-                                                color: Color(0xffe53935),
-                                                weight: 1000,
-                                              ),
-                                              const SizedBox(width: 10),
-                                              Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text('Check Out',
-                                                      style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.w300,
-                                                          fontSize: 14.sp,
-                                                          color: Color(
-                                                              0xffe53935))),
-                                                  Text('17:00:25',
-                                                      style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          fontSize: 16.sp,
-                                                          color: Color(
-                                                              0xffe53935)))
-                                                ],
-                                              )
-                                            ],
-                                          )),
-                                    )
-                                  ],
-                                )
-                              ],
-                            ),
+                          HistoryStatusCard(
+                            date: 'Senin, 25 Desember 2026',
+                            status: 'On Time',
+                            inTime: '08:01:13',
+                            outTime: '17:00:25',
                           ),
-                          const SizedBox(height: 20),
-                          Container(
-                            padding: EdgeInsets.all(20),
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              color: Colors.white,
-                            ),
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    Container(
-                                      width: 60,
-                                      height: 60,
-                                      alignment: Alignment.center,
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(15),
-                                          color: Color(0xfff57c00)),
-                                      child: const Icon(Symbols.schedule,
-                                          size: 30, color: Colors.white),
-                                    ),
-                                    const SizedBox(width: 10),
-                                    Expanded(
-                                        child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text('Minggu, 24 Desember 2026',
-                                            maxLines: 1,
-                                            overflow: TextOverflow.ellipsis,
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 16.sp)),
-                                        Container(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 12, vertical: 4),
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(20),
-                                              color: const Color(0xfffff3e0),
-                                              border: Border.all(
-                                                  color:
-                                                      const Color(0xffffe0b2))),
-                                          child: Text('Late',
-                                              style: TextStyle(
-                                                  color: Color(0xfff57c00),
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 12.sp)),
-                                        ),
-                                      ],
-                                    ))
-                                  ],
-                                ),
-                                const SizedBox(height: 20),
-                                Container(
-                                  height: 1,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                    color: Colors.black12,
-                                  ),
-                                ),
-                                const SizedBox(height: 20),
-                                Row(children: [
-                                  Expanded(
-                                    child: Container(
-                                      width: double.infinity,
-                                      padding: EdgeInsets.all(10),
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10),
-                                        color: const Color(0xffe8f5e9),
-                                      ),
-                                      child: Row(
-                                        children: [
-                                          Icon(
-                                            Symbols.login,
-                                            color: Color(0xff4caf50),
-                                            weight: 1000,
-                                          ),
-                                          const SizedBox(width: 10),
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text('Check In',
-                                                  style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.w300,
-                                                      fontSize: 14.sp,
-                                                      color:
-                                                          Color(0xff4caf50))),
-                                              Text('09:04:48',
-                                                  maxLines: 1,
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                  style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      fontSize: 16.sp,
-                                                      color: Color(0xff4caf50)))
-                                            ],
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                  const SizedBox(width: 10),
-                                  Expanded(
-                                    child: Container(
-                                      width: double.infinity,
-                                      padding: EdgeInsets.all(10),
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10),
-                                        color: const Color(0xffffebee),
-                                      ),
-                                      child: Row(
-                                        children: [
-                                          Icon(
-                                            Symbols.logout,
-                                            color: Color(0xffe53935),
-                                            weight: 1000,
-                                          ),
-                                          const SizedBox(width: 10),
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text('Check Out',
-                                                  style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.w300,
-                                                      fontSize: 14.sp,
-                                                      color:
-                                                          Color(0xffe53935))),
-                                              Text('17:01:23',
-                                                  style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      fontSize: 16.sp,
-                                                      color: Color(0xffe53935)))
-                                            ],
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ]),
-                                const SizedBox(height: 20),
-                                Container(
-                                  padding: EdgeInsets.all(10),
-                                  width: double.infinity,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      color: const Color(0xffffebee)),
-                                  child: Row(
-                                    children: [
-                                      Icon(
-                                        Symbols.schedule,
-                                        color: Color(0xffe53935),
-                                        weight: 1000,
-                                      ),
-                                      const SizedBox(width: 10),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            'Late',
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.w300,
-                                                fontSize: 14.sp,
-                                                color: Color(0xffe53935)),
-                                          ),
-                                          Text(
-                                            '124 Menit',
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 14.sp,
-                                              color: Color(0xffe53935),
-                                            ),
-                                          )
-                                        ],
-                                      )
-                                    ],
-                                  ),
-                                )
-                              ],
-                            ),
+                          HistoryStatusCard(
+                            date: 'Minggu, 24 Desember 2026',
+                            status: 'Late',
+                            inTime: '09:04:48',
+                            outTime: '17:01:23',
+                            lateTime: '124 Menit',
                           ),
-                          const SizedBox(height: 20),
-                          Container(
-                            padding: EdgeInsets.all(20),
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              color: Colors.white,
-                            ),
-                            child: Column(
-                              children: [
-                                Row(children: [
-                                  Container(
-                                    width: 60,
-                                    height: 60,
-                                    alignment: Alignment.center,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(15),
-                                      color: Color(0xffe53935),
-                                    ),
-                                    child: const Icon(
-                                      Symbols.cancel,
-                                      size: 30,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  const SizedBox(width: 10),
-                                  Expanded(
-                                      child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        'Sabtu, 23 Desember 2026',
-                                        maxLines: 1,
-                                        overflow: TextOverflow.ellipsis,
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 16.sp),
-                                      ),
-                                      Container(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 12, vertical: 4),
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                          color: const Color(0xffffebee),
-                                          border: Border.all(
-                                            color: const Color(0xffffcdd2),
-                                          ),
-                                        ),
-                                        child: Text(
-                                          'Absent',
-                                          style: TextStyle(
-                                              color: Color(0xffe53935),
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 12.sp),
-                                        ),
-                                      )
-                                    ],
-                                  ))
-                                ]),
-                                const SizedBox(height: 20),
-                                Container(
-                                  height: 1,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20),
-                                      color: Colors.black12),
-                                ),
-                                const SizedBox(height: 20),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Expanded(
-                                      child: Container(
-                                        width: double.infinity,
-                                        padding: EdgeInsets.all(10),
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          color: const Color(0xffe8f5e9),
-                                        ),
-                                        child: Row(
-                                          children: [
-                                            Icon(
-                                              Symbols.login,
-                                              color: Color(0xff4caf50),
-                                              weight: 1000,
-                                            ),
-                                            const SizedBox(width: 10),
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text('Check In',
-                                                    style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.w300,
-                                                        fontSize: 14.sp,
-                                                        color:
-                                                            Color(0xff4caf50))),
-                                                Text('08:01:13',
-                                                    style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontSize: 16.sp,
-                                                        color:
-                                                            Color(0xff4caf50)))
-                                              ],
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                    const SizedBox(width: 10),
-                                    Expanded(
-                                      child: Container(
-                                        width: double.infinity,
-                                        padding: EdgeInsets.all(10),
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          color: const Color(0xffffebee),
-                                        ),
-                                        child: Row(
-                                          children: [
-                                            Icon(
-                                              Symbols.logout,
-                                              color: Color(0xffe53935),
-                                              weight: 1000,
-                                            ),
-                                            const SizedBox(width: 10),
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text('Check Out',
-                                                    style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.w300,
-                                                        fontSize: 14.sp,
-                                                        color:
-                                                            Color(0xffe53935))),
-                                                Text(
-                                                  '-',
-                                                  style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 16.sp,
-                                                    color: Color(0xffe53935),
-                                                  ),
-                                                )
-                                              ],
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                    )
-                                  ],
-                                )
-                              ],
-                            ),
-                          )
+                          HistoryStatusCard(
+                            date: 'Sabtu, 23 Desember 2026',
+                            status: 'Absent',
+                            inTime: '08:01:13',
+                            outTime: '-',
+                          ),
                         ],
                       ),
                     ),
@@ -566,6 +79,239 @@ class _PresensiPageState extends State<PresensiPage> {
               )),
         ),
       ),
+    );
+  }
+}
+
+class HistoryStatusCard extends StatelessWidget {
+  final String date;
+  final String status;
+  final String inTime;
+  final String outTime;
+  final String? lateTime;
+
+  const HistoryStatusCard({
+    super.key,
+    required this.date,
+    required this.status,
+    required this.inTime,
+    required this.outTime,
+    this.lateTime,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Container(
+          padding: EdgeInsets.all(20),
+          width: double.infinity,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            color: Colors.white,
+          ),
+          child: Column(
+            children: [
+              _buildStatusBadge(status),
+              const SizedBox(height: 20),
+              Container(
+                height: 1,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: Colors.black12,
+                ),
+              ),
+              const SizedBox(height: 20),
+              Row(children: [
+                Expanded(
+                  child: Container(
+                    width: double.infinity,
+                    padding: EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: const Color(0xffe8f5e9),
+                    ),
+                    child: Row(
+                      children: [
+                        Icon(
+                          Symbols.login,
+                          color: Color(0xff4caf50),
+                          weight: 1000,
+                        ),
+                        const SizedBox(width: 10),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('Check In',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w300,
+                                    fontSize: 14.sp,
+                                    color: Color(0xff4caf50))),
+                            Text(inTime,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16.sp,
+                                    color: Color(0xff4caf50)))
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: Container(
+                    width: double.infinity,
+                    padding: EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: const Color(0xffffebee),
+                    ),
+                    child: Row(
+                      children: [
+                        Icon(
+                          Symbols.logout,
+                          color: Color(0xffe53935),
+                          weight: 1000,
+                        ),
+                        const SizedBox(width: 10),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('Check Out',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w300,
+                                    fontSize: 14.sp,
+                                    color: Color(0xffe53935))),
+                            Text(outTime,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16.sp,
+                                    color: Color(0xffe53935)))
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ]),
+              const SizedBox(height: 20),
+              if (lateTime != null && lateTime!.isNotEmpty) ...[
+                _buildLateCard(lateTime!),
+              ],
+            ],
+          ),
+        ),
+        const SizedBox(height: 20),
+      ],
+    );
+  }
+
+  Widget _buildLateCard(String timeLate) {
+    return Container(
+      padding: EdgeInsets.all(10),
+      width: double.infinity,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: const Color(0xffffebee)),
+      child: Row(
+        children: [
+          Icon(
+            Symbols.schedule,
+            color: Color(0xffe53935),
+            weight: 1000,
+          ),
+          const SizedBox(width: 10),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Late',
+                style: TextStyle(
+                    fontWeight: FontWeight.w300,
+                    fontSize: 14.sp,
+                    color: Color(0xffe53935)),
+              ),
+              Text(
+                lateTime!,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 14.sp,
+                  color: Color(0xffe53935),
+                ),
+              )
+            ],
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _buildStatusBadge(String status) {
+    IconData icon;
+    Color bgColor;
+    Color borderColor;
+    Color textColor;
+    if (status == 'On Time') {
+      icon = Symbols.check_circle;
+      bgColor = const Color(0xffe8f5e9);
+      textColor = const Color(0xff4caf50);
+      borderColor = const Color(0xffc8e6c9);
+    } else if (status == 'Late') {
+      icon = Symbols.schedule;
+      bgColor = const Color(0xfffff3e0);
+      textColor = const Color(0xfff57c00);
+      borderColor = const Color(0xffffe0b2);
+    } else {
+      icon = Symbols.cancel;
+      bgColor = const Color(0xffffebee);
+      textColor = const Color(0xffe53935);
+      borderColor = const Color(0xffffcdd2);
+    }
+
+    return Row(
+      children: [
+        Container(
+          width: 60,
+          height: 60,
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15), color: textColor),
+          child: Icon(icon, fill: 1, size: 30, color: Colors.white),
+        ),
+        const SizedBox(width: 10),
+        Expanded(
+            child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              date,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.sp),
+            ),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: bgColor,
+                border: Border.all(
+                  color: borderColor,
+                ),
+              ),
+              child: Text(
+                status,
+                style: TextStyle(
+                    color: textColor,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 12.sp),
+              ),
+            ),
+          ],
+        ))
+      ],
     );
   }
 }
